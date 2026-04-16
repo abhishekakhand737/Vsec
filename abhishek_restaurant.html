@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Restaurant – Authentic Indian Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --gold: #D4A017;
+    --deep: #1A0A00;
+    --cream: #FFF8F0;
+    --card-bg: #ffffff;
+    --text-muted: #6b5a4e;
+    --border: rgba(212,160,23,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(26,10,0,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,160,23,0.3);
+    transition: all 0.3s;
+  }
+  nav.scrolled { padding: 0.6rem 2.5rem; }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .nav-logo span { color: var(--saffron); font-style: italic; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: #e8d5c0;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--saffron);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-btn {
+    background: var(--saffron);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.3rem;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-btn:hover { background: var(--gold); transform: scale(1.05); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 25px; height: 2px; background: var(--gold); display: block; transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--deep);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    text-align: center; padding: 6rem 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,107,0,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 30%, rgba(212,160,23,0.1) 0%, transparent 60%);
+  }
+
+  .mandala {
+    position: absolute;
+    width: 600px; height: 600px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.05;
+    animation: rotateSlow 60s linear infinite;
+  }
+
+  @keyframes rotateSlow { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 750px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,160,23,0.15);
+    border: 1px solid rgba(212,160,23,0.4);
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 30px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title span { color: var(--saffron); font-style: italic; }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 0.8s 0.25s ease both;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: #c8b09a;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: var(--saffron);
+    color: white;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: #e55a00; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,107,0,0.35); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    border: 1.5px solid var(--gold);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--deep); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 3rem;
+    margin-top: 4rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.55s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label { font-size: 0.75rem; color: #a08070; text-transform: uppercase; letter-spacing: 1px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--saffron);
+    padding: 0.7rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-track span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 2rem;
+  }
+  .marquee-dot { color: rgba(255,255,255,0.5); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 5rem 2rem; }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--deep);
+    margin-bottom: 0.8rem;
+  }
+  .section-title span { color: var(--saffron); font-style: italic; }
+  .section-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    margin: 0 auto 3rem;
+    border-radius: 2px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: white; }
+  .about-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-box {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #2a0f00, #8B3A00);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    position: relative; overflow: hidden;
+  }
+  .about-img-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,107,0,0.3), transparent 60%);
+  }
+  .about-badge-box {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--saffron);
+    color: white; padding: 1.2rem 1.5rem;
+    border-radius: 12px; text-align: center;
+    box-shadow: 0 8px 30px rgba(255,107,0,0.3);
+  }
+  .about-badge-box strong { font-size: 1.8rem; font-family: 'Playfair Display', serif; display: block; }
+  .about-badge-box small { font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.9; }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--deep);
+    line-height: 1.3; margin-bottom: 1rem;
+  }
+  .about-text h2 em { color: var(--saffron); }
+  .about-text p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+
+  .features-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1.5rem; }
+  .features-list li {
+    font-size: 0.85rem; color: var(--deep); font-weight: 500;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .features-list li::before {
+    content: '✦';
+    color: var(--saffron); font-size: 0.7rem;
+  }
+
+  /* ── MENU ── */
+  #menu { background: var(--cream); }
+
+  .menu-tabs {
+    display: flex; justify-content: center; gap: 0.5rem;
+    flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .menu-tab {
+    padding: 0.5rem 1.4rem;
+    border-radius: 30px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .menu-tab.active, .menu-tab:hover {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: white;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .dish-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .dish-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(255,107,0,0.12); }
+
+  .dish-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+  }
+  .dish-img.c1 { background: linear-gradient(135deg, #fff0e0, #ffe0b0); }
+  .dish-img.c2 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+  .dish-img.c3 { background: linear-gradient(135deg, #fce4ec, #f8bbd9); }
+  .dish-img.c4 { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+  .dish-img.c5 { background: linear-gradient(135deg, #fffde7, #fff9c4); }
+  .dish-img.c6 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+
+  .veg-badge {
+    position: absolute; top: 10px; right: 10px;
+    width: 20px; height: 20px;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .veg { background: #e8f5e9; border: 1.5px solid #4caf50; color: #4caf50; }
+  .nonveg { background: #fce4ec; border: 1.5px solid #e53935; color: #e53935; }
+
+  .spice {
+    position: absolute; top: 10px; left: 10px;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.15); color: white;
+    padding: 2px 7px; border-radius: 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .dish-body { padding: 1.1rem; }
+  .dish-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.3rem;
+  }
+  .dish-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem; }
+  .dish-footer { display: flex; justify-content: space-between; align-items: center; }
+  .dish-price { font-size: 1.1rem; font-weight: 700; color: var(--saffron); }
+  .dish-price span { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+
+  .add-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--saffron);
+    border: none; color: white;
+    font-size: 1.2rem; font-weight: 300;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .add-btn:hover { background: #cc5500; transform: scale(1.15); }
+
+  /* ── SPECIALS ── */
+  #specials { background: var(--deep); }
+  #specials .section-title { color: white; }
+  #specials .section-label { color: var(--gold); }
+
+  .specials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .special-card {
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(212,160,23,0.2);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .special-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .special-card:hover::before { transform: scaleX(1); }
+  .special-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-4px); }
+
+  .special-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  .special-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .special-card p { font-size: 0.82rem; color: #a09080; line-height: 1.7; }
+  .special-price {
+    display: inline-block; margin-top: 1rem;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--saffron);
+  }
+
+  /* ── TESTIMONIALS ── */
+  #reviews { background: white; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+  }
+  .review-card {
+    background: var(--cream);
+    border-radius: 16px; padding: 1.5rem;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .review-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; line-height: 0.6;
+    color: rgba(255,107,0,0.12);
+    position: absolute; top: 1.2rem; left: 1.2rem;
+  }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .review-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; font-style: italic; margin-bottom: 1rem; }
+  .reviewer { display: flex; align-items: center; gap: 0.7rem; }
+  .reviewer-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 0.85rem;
+  }
+  .reviewer-name { font-size: 0.85rem; font-weight: 600; color: var(--deep); }
+  .reviewer-loc { font-size: 0.72rem; color: var(--text-muted); }
+
+  /* ── RESERVATION ── */
+  #reserve { background: var(--cream); }
+  .reserve-wrap {
+    max-width: 600px; margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(255,107,0,0.07);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--deep); letter-spacing: 0.5px; text-transform: uppercase; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.7rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: var(--deep);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--saffron); background: white; }
+  .form-group textarea { resize: none; height: 80px; }
+  .form-submit {
+    width: 100%; margin-top: 1.2rem;
+    padding: 0.95rem;
+    background: var(--saffron);
+    color: white; border: none;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.3s;
+  }
+  .form-submit:hover { background: #cc5500; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,107,0,0.3); }
+
+  .toast {
+    display: none;
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    background: #2d7a3a; color: white;
+    padding: 1rem 1.5rem; border-radius: 12px;
+    font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    animation: slideIn 0.4s ease;
+  }
+  @keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    color: #a09080;
+    padding: 3rem 2rem 1.5rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 2.5rem;
+    max-width: 1100px; margin: 0 auto 2rem;
+  }
+  .footer-brand .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--gold);
+    margin-bottom: 0.8rem; display: block;
+  }
+  .footer-brand p { font-size: 0.82rem; line-height: 1.7; max-width: 220px; }
+  .footer-social { display: flex; gap: 0.7rem; margin-top: 1.2rem; }
+  .soc-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--gold);
+    transition: background 0.2s;
+    cursor: pointer; text-decoration: none;
+  }
+  .soc-btn:hover { background: var(--saffron); }
+
+  .footer-col h4 { color: var(--gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { font-size: 0.82rem; margin-bottom: 0.6rem; color: #907060; }
+  .footer-col a { color: #907060; text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold); }
+  .contact-item { display: flex; gap: 0.5rem; font-size: 0.82rem; color: #907060; margin-bottom: 0.6rem; }
+  .contact-icon { color: var(--saffron); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 1.2rem;
+    text-align: center;
+    font-size: 0.78rem; color: #605040;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  /* ── CART FLOAT ── */
+  .cart-float {
+    position: fixed; bottom: 2rem; left: 2rem;
+    background: var(--deep);
+    border: 1px solid var(--saffron);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    display: none; align-items: center; gap: 0.7rem;
+    font-size: 0.85rem; font-weight: 500;
+    z-index: 50;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: popIn 0.3s ease;
+  }
+  @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .cart-float .cart-count {
+    background: var(--saffron);
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-img-wrap { max-width: 300px; margin: 0 auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .nav { padding: 1rem 1.2rem; }
+    .reserve-wrap { padding: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.5rem; }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">Abhishek <span>Restaurant</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#reserve">Reserve</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('reserve').scrollIntoView({behavior:'smooth'})">Book a Table</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="mandala" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" stroke="#D4A017" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="75" stroke="#D4A017" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="60" stroke="#D4A017" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="45" stroke="#D4A017" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="30" stroke="#D4A017" stroke-width="0.5"/>
+    <line x1="100" y1="10" x2="100" y2="190" stroke="#D4A017" stroke-width="0.3"/>
+    <line x1="10" y1="100" x2="190" y2="100" stroke="#D4A017" stroke-width="0.3"/>
+    <line x1="27" y1="27" x2="173" y2="173" stroke="#D4A017" stroke-width="0.3"/>
+    <line x1="173" y1="27" x2="27" y2="173" stroke="#D4A017" stroke-width="0.3"/>
+    <line x1="10" y1="65" x2="190" y2="135" stroke="#D4A017" stroke-width="0.2"/>
+    <line x1="10" y1="135" x2="190" y2="65" stroke="#D4A017" stroke-width="0.2"/>
+    <line x1="65" y1="10" x2="135" y2="190" stroke="#D4A017" stroke-width="0.2"/>
+    <line x1="135" y1="10" x2="65" y2="190" stroke="#D4A017" stroke-width="0.2"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Since 2005 · Nagpur, Maharashtra ✦</div>
+    <h1 class="hero-title">Abhishek <span>Restaurant</span></h1>
+    <p class="hero-subtitle">Asli Swad, Dil Se Pakaya</p>
+    <p class="hero-desc">Experience the rich, aromatic flavors of authentic Indian cuisine — from sizzling tandoori delicacies to soul-warming curries, every dish tells a story of tradition and passion.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#menu">Explore Our Menu</a>
+      <a class="btn-outline" href="#reserve">Reserve a Table</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">150+</span><span class="stat-label">Dishes</span></div>
+      <div class="stat"><span class="stat-num">20k+</span><span class="stat-label">Happy Guests</span></div>
+      <div class="stat"><span class="stat-num">18+</span><span class="stat-label">Years Legacy</span></div>
+      <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Butter Chicken</span><span class="marquee-dot">◆</span>
+    <span>Dal Makhani</span><span class="marquee-dot">◆</span>
+    <span>Biryani</span><span class="marquee-dot">◆</span>
+    <span>Paneer Tikka</span><span class="marquee-dot">◆</span>
+    <span>Tandoori Roti</span><span class="marquee-dot">◆</span>
+    <span>Gulab Jamun</span><span class="marquee-dot">◆</span>
+    <span>Masala Chai</span><span class="marquee-dot">◆</span>
+    <span>Chole Bhature</span><span class="marquee-dot">◆</span>
+    <span>Palak Paneer</span><span class="marquee-dot">◆</span>
+    <span>Butter Chicken</span><span class="marquee-dot">◆</span>
+    <span>Dal Makhani</span><span class="marquee-dot">◆</span>
+    <span>Biryani</span><span class="marquee-dot">◆</span>
+    <span>Paneer Tikka</span><span class="marquee-dot">◆</span>
+    <span>Tandoori Roti</span><span class="marquee-dot">◆</span>
+    <span>Gulab Jamun</span><span class="marquee-dot">◆</span>
+    <span>Masala Chai</span><span class="marquee-dot">◆</span>
+    <span>Chole Bhature</span><span class="marquee-dot">◆</span>
+    <span>Palak Paneer</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Our Story</p>
+  <h2 class="section-title">A Legacy of <span>Authentic Flavors</span></h2>
+  <div class="section-line"></div>
+  <div class="about-grid reveal">
+    <div class="about-img-wrap">
+      <div class="about-img-box">🍛</div>
+      <div class="about-badge-box">
+        <strong>18+</strong>
+        <small>Years of Excellence</small>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>Khana Jo <em>Dil Ko Chhu Jaaye</em></h2>
+      <p>Abhishek Restaurant was born from a simple dream — to bring the soulful, time-honored recipes of Indian kitchens to every plate. Our chefs use age-old techniques, hand-ground spices, and the freshest locally sourced ingredients.</p>
+      <p>From the smoky aroma of our clay tandoor to the slow-simmered richness of our gravies, every bite carries the warmth of a home-cooked Indian meal.</p>
+      <ul class="features-list">
+        <li>Fresh Daily Ingredients</li>
+        <li>Traditional Clay Tandoor</li>
+        <li>Hand-Ground Spices</li>
+        <li>Pure Desi Ghee Used</li>
+        <li>Vegetarian Friendly</li>
+        <li>Hygienic Kitchen</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <p class="section-label">Our Menu</p>
+  <h2 class="section-title">Taste the <span>Best of India</span></h2>
+  <div class="section-line"></div>
+
+  <div class="menu-tabs">
+    <button class="menu-tab active" data-cat="all">All Items</button>
+    <button class="menu-tab" data-cat="starter">Starters</button>
+    <button class="menu-tab" data-cat="main">Main Course</button>
+    <button class="menu-tab" data-cat="bread">Breads</button>
+    <button class="menu-tab" data-cat="rice">Rice &amp; Biryani</button>
+    <button class="menu-tab" data-cat="dessert">Desserts</button>
+    <button class="menu-tab" data-cat="drink">Drinks</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- CHEF'S SPECIALS -->
+<section id="specials">
+  <p class="section-label">Chef Recommends</p>
+  <h2 class="section-title" style="color:white">Today's <span style="color:var(--gold)">Special Thali</span></h2>
+  <div class="section-line"></div>
+  <div class="specials-grid reveal">
+    <div class="special-card">
+      <span class="special-icon">🍽️</span>
+      <h3>Rajasthani Thali</h3>
+      <p>Dal Baati Churma, Gatte ki Sabzi, Ker Sangri, Bajre ki Roti, Chaas &amp; Meetha.</p>
+      <span class="special-price">₹349</span>
+    </div>
+    <div class="special-card">
+      <span class="special-icon">🫕</span>
+      <h3>Punjabi Thali</h3>
+      <p>Butter Chicken / Paneer, Dal Makhani, Naan, Jeera Rice, Raita &amp; Gulab Jamun.</p>
+      <span class="special-price">₹299</span>
+    </div>
+    <div class="special-card">
+      <span class="special-icon">🍲</span>
+      <h3>South Indian Thali</h3>
+      <p>Sambar, Rasam, Kootu, Papad, Pickle, Steamed Rice &amp; Payasam.</p>
+      <span class="special-price">₹249</span>
+    </div>
+    <div class="special-card">
+      <span class="special-icon">🎉</span>
+      <h3>Abhishek Special</h3>
+      <p>Our signature 7-course feast — a royal spread curated by our head chef.</p>
+      <span class="special-price">₹599</span>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-label">Guests Say</p>
+  <h2 class="section-title">Love from Our <span>Customers</span></h2>
+  <div class="section-line"></div>
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Butter chicken yahaan ka best hai puri Nagpur mein! Gravy itni creamy thi, naan ke saath seedha paradise. Zaroor aaenge wapas!</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">RK</div>
+        <div><div class="reviewer-name">Rahul Kumar</div><div class="reviewer-loc">Nagpur, MH</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Hyderabad Biryani try ki thi — dum-cooked perfection! Spices bilkul sahi, rice perfect. Ambiance bhi bahut sundar hai.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">PS</div>
+        <div><div class="reviewer-name">Priya Sharma</div><div class="reviewer-loc">Pune, MH</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Family ke saath aaya tha, sabko bohot pasand aaya! Paneer dishes outstanding thi. Staff bhi bahut friendly hai.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">AM</div>
+        <div><div class="reviewer-name">Aakash Mishra</div><div class="reviewer-loc">Nagpur, MH</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reserve">
+  <p class="section-label">Reserve</p>
+  <h2 class="section-title">Book Your <span>Table</span></h2>
+  <div class="section-line"></div>
+  <div class="reserve-wrap reveal">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="rName" placeholder="Aapka naam">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="rPhone" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="rDate">
+      </div>
+      <div class="form-group">
+        <label>Time</label>
+        <input type="time" id="rTime" value="19:00">
+      </div>
+      <div class="form-group">
+        <label>Guests</label>
+        <select id="rGuests">
+          <option>1 Person</option>
+          <option>2 Persons</option>
+          <option selected>4 Persons</option>
+          <option>6 Persons</option>
+          <option>8+ Persons</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Occasion</label>
+        <select id="rOccasion">
+          <option>Regular Dining</option>
+          <option>Birthday</option>
+          <option>Anniversary</option>
+          <option>Business Lunch</option>
+          <option>Family Gathering</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Special Request</label>
+        <textarea id="rNote" placeholder="Koi special request? (e.g. window seat, cake, veg only...)"></textarea>
+      </div>
+    </div>
+    <button class="form-submit" onclick="submitReservation()">🍽️ Confirm Reservation</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Abhishek Restaurant</span>
+      <p>Serving authentic Indian flavors with love since 2005. Every meal is a celebration of India's rich culinary heritage.</p>
+      <div class="footer-social">
+        <a class="soc-btn" href="#">f</a>
+        <a class="soc-btn" href="#">in</a>
+        <a class="soc-btn" href="#">yt</a>
+        <a class="soc-btn" href="#">ig</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#specials">Specials</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#reserve">Reservations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Timings</h4>
+      <ul>
+        <li>Mon – Fri</li>
+        <li>11:00 AM – 11:00 PM</li>
+        <li style="margin-top:0.5rem">Sat – Sun</li>
+        <li>10:00 AM – 11:30 PM</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="contact-item"><span class="contact-icon">📍</span> Sitabuldi, Nagpur – 440012, Maharashtra</div>
+      <div class="contact-item"><span class="contact-icon">📞</span> +91 98765 43210</div>
+      <div class="contact-item"><span class="contact-icon">✉️</span> info@abhishekrestaurant.in</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Abhishek Restaurant. All rights reserved. Made with ❤️ in Nagpur.
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Table booked! We'll call you to confirm.</div>
+
+<!-- CART FLOAT -->
+<div class="cart-float" id="cartFloat">
+  <span>🛒 Cart</span>
+  <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<script>
+  // ── MENU DATA ──
+  const dishes = [
+    { name:"Paneer Tikka",     cat:"starter", emoji:"🧀", color:"c1", veg:true,  spice:"Medium", desc:"Marinated cottage cheese grilled in clay tandoor with chaat masala.", price:220 },
+    { name:"Chicken Malai Tikka", cat:"starter", emoji:"🍗", color:"c3", veg:false, spice:"Mild",  desc:"Tender chicken in creamy malai marinade, slow grilled to perfection.", price:280 },
+    { name:"Samosa (2 pcs)",   cat:"starter", emoji:"🥟", color:"c5", veg:true,  spice:"Mild",  desc:"Crispy fried pastry filled with spiced aloo-matar, served with chutney.", price:80 },
+    { name:"Dahi Puri",        cat:"starter", emoji:"🫙", color:"c2", veg:true,  spice:"Mild",  desc:"Crunchy puris filled with tangy curd, tamarind & green chutney.", price:120 },
+    { name:"Seekh Kebab",      cat:"starter", emoji:"🍢", color:"c3", veg:false, spice:"Hot",   desc:"Minced mutton kebabs with aromatic spices, grilled on skewers.", price:320 },
+    { name:"Butter Chicken",   cat:"main",    emoji:"🍛", color:"c1", veg:false, spice:"Medium",desc:"Classic Murgh Makhani in rich tomato-cream gravy, best with naan.", price:340 },
+    { name:"Palak Paneer",     cat:"main",    emoji:"🥬", color:"c2", veg:true,  spice:"Mild",  desc:"Fresh spinach gravy with soft paneer cubes and aromatic spices.", price:260 },
+    { name:"Dal Makhani",      cat:"main",    emoji:"🫘", color:"c4", veg:true,  spice:"Mild",  desc:"Black lentils slow-cooked overnight with butter and cream. A legend.", price:220 },
+    { name:"Mutton Rogan Josh",cat:"main",    emoji:"🍖", color:"c3", veg:false, spice:"Hot",   desc:"Kashmiri-style slow-cooked mutton in bold, fiery red gravy.", price:420 },
+    { name:"Chole Masala",     cat:"main",    emoji:"🫕", color:"c5", veg:true,  spice:"Medium",desc:"Tangy chickpeas cooked with whole spices and amchur. Served with bhature.", price:200 },
+    { name:"Kadai Paneer",     cat:"main",    emoji:"🧀", color:"c6", veg:true,  spice:"Medium",desc:"Paneer & capsicum tossed in bold kadai masala. Restaurant classic.", price:280 },
+    { name:"Butter Naan",      cat:"bread",   emoji:"🫓", color:"c1", veg:true,  spice:"None",  desc:"Soft leavened bread brushed with butter, baked in clay tandoor.", price:50 },
+    { name:"Tandoori Roti",    cat:"bread",   emoji:"🫓", color:"c5", veg:true,  spice:"None",  desc:"Whole wheat roti cooked directly on tandoor. Light & healthy.", price:35 },
+    { name:"Garlic Naan",      cat:"bread",   emoji:"🧄", color:"c2", veg:true,  spice:"None",  desc:"Naan topped with roasted garlic and coriander. Aromatic and crispy.", price:60 },
+    { name:"Hyderabadi Biryani",cat:"rice",   emoji:"🍚", color:"c5", veg:false, spice:"Hot",   desc:"Dum-cooked basmati with tender chicken, fried onions & saffron.", price:380 },
+    { name:"Veg Biryani",      cat:"rice",    emoji:"🌾", color:"c2", veg:true,  spice:"Medium",desc:"Seasonal vegetables layered with fragrant basmati rice & whole spices.", price:260 },
+    { name:"Jeera Rice",       cat:"rice",    emoji:"🍙", color:"c5", veg:true,  spice:"None",  desc:"Fluffy basmati tempered with cumin seeds. Simple & perfect.", price:120 },
+    { name:"Gulab Jamun",      cat:"dessert", emoji:"🍮", color:"c1", veg:true,  spice:"None",  desc:"Soft khoya balls soaked in rose-cardamom sugar syrup. Served warm.", price:100 },
+    { name:"Kulfi Falooda",    cat:"dessert", emoji:"🍦", color:"c4", veg:true,  spice:"None",  desc:"Traditional Indian ice cream with rose falooda, basil seeds & rabri.", price:140 },
+    { name:"Gajar Halwa",      cat:"dessert", emoji:"🥕", color:"c1", veg:true,  spice:"None",  desc:"Slow-cooked carrot pudding with desi ghee, milk & dry fruits.", price:120 },
+    { name:"Masala Chai",      cat:"drink",   emoji:"🍵", color:"c5", veg:true,  spice:"None",  desc:"Strong Assam tea brewed with ginger, cardamom & tulsi. Desi style.", price:50 },
+    { name:"Mango Lassi",      cat:"drink",   emoji:"🥭", color:"c5", veg:true,  spice:"None",  desc:"Thick Alphonso mango blended with creamy yoghurt. Summer special.", price:120 },
+    { name:"Chaas (Buttermilk)",cat:"drink",  emoji:"🥛", color:"c2", veg:true,  spice:"None",  desc:"Chilled spiced buttermilk with roasted cumin & mint. Refreshing.", price:60 },
+  ];
+
+  let cartCount = 0;
+  let activeTab = 'all';
+
+  function renderMenu(cat) {
+    const grid = document.getElementById('menuGrid');
+    const filtered = cat === 'all' ? dishes : dishes.filter(d => d.cat === cat);
+    grid.innerHTML = filtered.map(d => `
+      <div class="dish-card">
+        <div class="dish-img ${d.color}">
+          <span style="font-size:3.5rem">${d.emoji}</span>
+          <span class="veg-badge ${d.veg ? 'veg' : 'nonveg'}">${d.veg ? '●' : '●'}</span>
+          ${d.spice !== 'None' ? `<span class="spice">${d.spice}</span>` : ''}
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">${d.name}</div>
+          <div class="dish-desc">${d.desc}</div>
+          <div class="dish-footer">
+            <div class="dish-price">₹${d.price} <span>/ plate</span></div>
+            <button class="add-btn" onclick="addToCart(this)">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function addToCart(btn) {
+    cartCount++;
+    document.getElementById('cartCount').textContent = cartCount;
+    const cf = document.getElementById('cartFloat');
+    cf.style.display = 'flex';
+    btn.textContent = '✓';
+    btn.style.background = '#2d7a3a';
+    setTimeout(() => { btn.textContent = '+'; btn.style.background = 'var(--saffron)'; }, 1200);
+  }
+
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      activeTab = this.dataset.cat;
+      renderMenu(activeTab);
+    });
+  });
+
+  renderMenu('all');
+
+  // ── RESERVATION ──
+  function submitReservation() {
+    const name = document.getElementById('rName').value.trim();
+    const phone = document.getElementById('rPhone').value.trim();
+    const date = document.getElementById('rDate').value;
+    if (!name || !phone || !date) {
+      alert('Please fill in Name, Phone and Date!');
+      return;
+    }
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    toast.textContent = `✅ ${name} ji, table book ho gaya! Milte hain ${date} ko.`;
+    setTimeout(() => { toast.style.display = 'none'; }, 4000);
+    document.getElementById('rName').value = '';
+    document.getElementById('rPhone').value = '';
+    document.getElementById('rDate').value = '';
+    document.getElementById('rNote').value = '';
+  }
+
+  // ── NAVBAR SCROLL ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── HAMBURGER ──
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    if (links.style.display === 'flex') {
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '60px'; links.style.left = '0'; links.style.right = '0';
+      links.style.background = 'rgba(26,10,0,0.97)';
+      links.style.padding = '1rem 2rem';
+      links.style.gap = '1rem';
+    }
+  }
+
+  // set today's date as min
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('rDate').min = today;
+  document.getElementById('rDate').value = today;
+</script>
+</body>
+</html>
